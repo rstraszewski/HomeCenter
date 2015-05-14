@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>@ViewBag.Title - My ASP.NET MVC Application</title>
+    @RenderSection("meta", required: false)
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="~/Content/themes/default/bootstrap.css" rel="stylesheet">
+    @Styles.Render("~/Content/themes/jqueryui")
+    @Styles.Render("~/Content/css")
+    @Html.Partial("_html5shiv")
+
+    <!-- Fav and touch icons -->
+     <!--<link rel="apple-touch-icon-precomposed" sizes="144x144" href="~/Content/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="~/Content/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="~/Content/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="~/Content/ico/apple-touch-icon-57-precomposed.png">
+    <link href="~/Content/ico/favicon.ico" rel="shortcut icon" type="image/x-icon" />-->
+    <meta name="description" content="The description of my page" />
+</head>
+<body>
+    @Html.Partial("_NavBar")
+
+    @RenderSection("featured", required: false)
+
+    <div class="container">
+        @RenderBody()
+        <hr />
+        <div class="footer">
+            <p>&copy; Company 2014</p>
+        </div>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/angular")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

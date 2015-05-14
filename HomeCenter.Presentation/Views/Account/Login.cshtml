@@ -1,0 +1,49 @@
+﻿@using Microsoft.Ajax.Utilities
+@model HomeCenter.AuthenticationDomain.UserDtoInput
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <div class="row">
+            <div class="col-md-1 editor-field">
+                <p>Username:</p>
+            </div>
+            <div class="col-md-3 editor-field">
+                <input type="text" class="form-control input-sm" id="inputError2" ng-model="username" name="Username" required />
+            </div>
+            <div class="col-md-3 editor-field">
+                <span class="label label-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-1 editor-field">
+                <p>Password:</p>
+            </div>
+            <div class="col-md-3 editor-field">
+                <input type="text" class="form-control input-sm" id="inputError2" ng-model="password" name="Password" required />
+            </div>
+            <div class="col-md-3 editor-field">
+                <span class="label label-danger"></span>
+            </div>
+        </div>
+        <div class="row">&nbsp;</div>
+        <div class="row">
+            <div class="col-md-1">
+                <p>
+                    <button type="submit" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-plus"></span>Login
+                    </button>
+                </p>
+            </div>
+        </div>
+
+    </fieldset>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

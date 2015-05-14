@@ -1,0 +1,194 @@
+﻿@{
+    ViewBag.Title = "Build yor place";
+}
+
+<div ng-cloak ng-app="myTutorialApp">
+    <div ng-cloak ng-controller="createBuildingController as vm">
+        <div cg-busy="promise">
+
+            <div class="row">
+
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="panel panel-primary" ng-repeat="building in buildings">
+                            <div class="panel-heading">
+                                {{building.Name}}
+                                <button type="button" class="building-removal btn btn-default btn-xs pull-right" ng-click="vm.removeBuilding(building)">
+                                    <span class="glyphicon glyphicon-minus"></span>Remove building
+                                </button>
+                            </div>
+                            <div class="panel-body">
+                                <div class="panel panel-primary" ng-repeat="floor in building.Floors">
+                                    <div class="panel-heading">
+                                        {{floor.Name}}.
+                                        <button type="button" class="building-removal btn btn-default btn-xs pull-right" ng-click="vm.removeFloor(floor, building)">
+                                            <span class="glyphicon glyphicon-minus"></span> Remove floor
+                                        </button>
+                                    </div>
+                                    <div class="panel-body">
+                                        <ul>
+                                            <li ng-repeat="room in floor.Rooms">
+                                                <div class="row">
+                                                    <div class="col-md-8">
+                                                        {{room.Name}}
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <button type="button" class="building-removal btn btn-default btn-xs pull-right" ng-click="vm.removeRoom(room, floor, building)">
+                                                            <span class="glyphicon glyphicon-minus"></span> Remove room
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <hr />
+                                            </li>
+                                            <li>
+                                                <button type="button" class="btn btn-primary btn-md" ng-click="vm.createRoom(floor,building)">
+                                                    <span class="glyphicon glyphicon-plus"></span>Add Room
+                                                </button>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+
+                                </div>
+                                <button type="button" class="btn btn-primary btn-md" ng-click="vm.createFloor(building)">
+                                    <span class="glyphicon glyphicon-plus"></span> Add Floor
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <button type="button" class="btn btn-primary btn-md" ng-click="vm.createBuilding()">
+                    <span class="glyphicon glyphicon-plus"></span> Add Building
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+
+    @* Add Building Popup *@
+    @using (Html.NgTemplate("addBuildingPopup.html"))
+    {
+
+        <div class="modal-header">
+            <h3 class="modal-title">Building creator</h3>
+        </div>
+        <div class="modal-body">
+            <form name="buildingForm">
+                <ul class="list-group">
+
+                    <li ng-repeat="buildingToAdd in buildingsToAdd" class="list-group-item">
+                        <div class="row">
+                            <div class="{{buildingToAdd.Name.length!=0 ? '' : 'has-error'}} has-feedback col-md-6">
+                                <input name="buildingName" id="inputError2" type="text" ng-model="buildingToAdd.Name" tooltip="Give your building a name!" tooltip-trigger="focus" class="form-control input-sm">
+                            </div>
+                            <div class="col-md-4">
+                                <button type="button" class="btn btn-default btn-sm btn-block" ng-click="vm.addBuilding($index, buildingToAdd)">
+                                    <span class="glyphicon glyphicon-plus"></span>Add single building
+                                </button>
+                            </div>
+                            <div class="col-md-2" ng-if="$index!=0">
+                                <button type="button" class="btn btn-default btn-sm" ng-click="vm.pop($index)">
+                                    <span class="glyphicon glyphicon-minus"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </li>
+
+                </ul>
+            </form>
+            <button type="button" class="btn btn-default btn-sm" ng-click="vm.addRow()">
+                <span class="glyphicon glyphicon-plus"></span>Add row!
+            </button>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="vm.add()">Add</button>
+            <button class="btn btn-warning" ng-click="vm.cancel()">Cancel</button>
+        </div>
+    }
+    @* Add Building Popup *@
+
+    @* Add Floor Popup *@
+    @using (Html.NgTemplate("addFloorPopup.html"))
+    {
+        <div class="modal-header">
+            <h3 class="modal-title">Floor creator</h3>
+        </div>
+        <div class="modal-body">
+            <form name="buildingForm">
+                <ul class="list-group">
+
+                    <li ng-repeat="floorToAdd in floorsToAdd" class="list-group-item">
+                        <div class="row">
+                            <div class="{{floorToAdd.Name.length!=0 ? '' : 'has-error'}} has-feedback col-md-6">
+                                <input name="floorName" id="inputError2" type="text" ng-model="floorToAdd.Name" tooltip="Give your floor a name!" tooltip-trigger="focus" class="form-control input-sm">
+                            </div>
+                            <div class="col-md-4">
+                                <button type="button" class="btn btn-default btn-sm btn-block" ng-click="vm.addFloor($index, floorToAdd)">
+                                    <span class="glyphicon glyphicon-plus"></span>Add single floor
+                                </button>
+                            </div>
+                            <div class="col-md-2" ng-if="$index!=0">
+                                <button type="button" class="btn btn-default btn-sm" ng-click="vm.pop($index)">
+                                    <span class="glyphicon glyphicon-minus"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </li>
+
+                </ul>
+            </form>
+            <button type="button" class="btn btn-default btn-sm" ng-click="vm.addRow()">
+                <span class="glyphicon glyphicon-plus"></span>Add row!
+            </button>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="vm.add()">Add</button>
+            <button class="btn btn-warning" ng-click="vm.cancel()">Cancel</button>
+        </div>
+    }
+    @* Add Floor Popup *@
+
+    @* Add Room Popup *@
+    @using (Html.NgTemplate("addRoomPopup.html"))
+    {
+        <div class="modal-header">
+            <h3 class="modal-title">Room creator</h3>
+        </div>
+        <div class="modal-body">
+            <form name="buildingForm">
+                <ul class="list-group">
+
+                    <li ng-repeat="roomToAdd in roomsToAdd" class="list-group-item">
+                        <div class="row">
+                            <div class="{{roomToAdd.Name.length!=0 ? '' : 'has-error'}} has-feedback col-md-6">
+                                <input name="roomName" id="inputError2" type="text" ng-model="roomToAdd.Name" tooltip="Give your floor a name!" tooltip-trigger="focus" class="form-control input-sm">
+                            </div>
+                            <div class="col-md-4">
+                                <button type="button" class="btn btn-default btn-sm btn-block" ng-click="vm.addRoom($index, roomToAdd)">
+                                    <span class="glyphicon glyphicon-plus"></span>Add single room
+                                </button>
+                            </div>
+                            <div class="col-md-2" ng-if="$index!=0">
+                                <button type="button" class="btn btn-default btn-sm" ng-click="vm.pop($index)">
+                                    <span class="glyphicon glyphicon-minus"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </li>
+
+                </ul>
+            </form>
+            <button type="button" class="btn btn-default btn-sm" ng-click="vm.addRow()">
+                <span class="glyphicon glyphicon-plus"></span>Add row!
+            </button>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="vm.add()">Add</button>
+            <button class="btn btn-warning" ng-click="vm.cancel()">Cancel</button>
+        </div>
+    }
+    @* Add Floor Popup *@
+</div>

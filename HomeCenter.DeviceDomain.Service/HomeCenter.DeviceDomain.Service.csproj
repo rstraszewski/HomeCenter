@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7FE13AAA-32D4-4BC3-8C33-CF2502334DFF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>HomeCenter.DeviceDomain.Service</RootNamespace>
+    <AssemblyName>HomeCenter.DeviceDomain.Service</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.3.2.1\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper.Net4">
+      <HintPath>..\packages\AutoMapper.3.2.1\lib\net40\AutoMapper.Net4.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data, Version=6.9.3.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Activities" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="TypeLite">
+      <HintPath>..\packages\TypeLite.0.9.5.0\lib\net4\TypeLite.dll</HintPath>
+    </Reference>
+    <Reference Include="TypeLite.Net4">
+      <HintPath>..\packages\TypeLite.0.9.5.0\lib\net4\TypeLite.Net4.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DTOs\BuildingDtoInput.cs" />
+    <Compile Include="DTOs\BuildingDtoOutput.cs" />
+    <Compile Include="DTOs\DeviceDtoInput.cs" />
+    <Compile Include="DTOs\DeviceDtoOutput.cs" />
+    <Compile Include="DTOs\DeviceDtoSimple.cs" />
+    <Compile Include="DTOs\DeviceJobDto.cs" />
+    <Compile Include="DTOs\DeviceJobDtoInput.cs" />
+    <Compile Include="DTOs\DeviceRelationDtoInput.cs" />
+    <Compile Include="DTOs\DeviceTypeDtoInput.cs" />
+    <Compile Include="DTOs\DeviceTypeDtoOutput.cs" />
+    <Compile Include="DTOs\FloorDtoInput.cs" />
+    <Compile Include="DTOs\FloorDtoOutput.cs" />
+    <Compile Include="DTOs\GroupDtoInput.cs" />
+    <Compile Include="DTOs\GroupDtoOutPut.cs" />
+    <Compile Include="DTOs\RoomDtoInput.cs" />
+    <Compile Include="DTOs\RoomDtoOutput.cs" />
+    <Compile Include="ServiceLayer\BuildingControlService.cs" />
+    <Compile Include="ServiceLayer\CreateControlUiService.cs" />
+    <Compile Include="DTOs\DeviceRelationDto.cs" />
+    <Compile Include="ServiceLayer\DeviceService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceLayer\DeviceTypeControlService.cs" />
+    <Compile Include="ServiceLayer\IBuildingControlService.cs" />
+    <Compile Include="ServiceLayer\ICreateControlUiService.cs" />
+    <Compile Include="ServiceLayer\IDeviceService.cs" />
+    <Compile Include="ServiceLayer\IDeviceTypeControlService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HomeCenter.AuthenticationDomain.Model\HomeCenter.AuthenticationDomain.Model.csproj">
+      <Project>{C99DCE89-EFB0-4810-ABCC-40A1D8EE8AFC}</Project>
+      <Name>HomeCenter.AuthenticationDomain.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HomeCenter.AuthenticationDomain.Service\HomeCenter.AuthenticationDomain.Service.csproj">
+      <Project>{D03D1BC4-C2AA-4204-9BCF-30840A774A62}</Project>
+      <Name>HomeCenter.AuthenticationDomain.Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HomeCenter.CommonDomain.Infrastructure\HomeCenter.CommonDomain.Infrastructure.csproj">
+      <Project>{e9506ed1-ca03-4044-beb8-842834bd797c}</Project>
+      <Name>HomeCenter.CommonDomain.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HomeCenter.CommonDomain.Model\HomeCenter.CommonDomain.Model.csproj">
+      <Project>{7bbfa0ca-3adc-4ef1-951e-1301081b2be5}</Project>
+      <Name>HomeCenter.CommonDomain.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HomeCenter.CommonDomain.Service\HomeCenter.CommonDomain.Service.csproj">
+      <Project>{5E43E594-B8F8-4E93-BB7B-2B45C1CDDEA8}</Project>
+      <Name>HomeCenter.CommonDomain.Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HomeCenter.DeviceDomain.Infrastructure\HomeCenter.DeviceDomain.Infrastructure.csproj">
+      <Project>{1ac47619-6e4c-4ff9-ac7a-6b45f80287eb}</Project>
+      <Name>HomeCenter.DeviceDomain.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HomeCenter.DeviceDomain.Model\HomeCenter.DeviceDomain.Model.csproj">
+      <Project>{90F9556E-3ED7-4064-8003-D5C01D645097}</Project>
+      <Name>HomeCenter.DeviceDomain.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HomeCenter.EventDomain.Service\HomeCenter.HistoryDomain.Service.csproj">
+      <Project>{eb83931c-6c7d-47b5-bdd4-3010fc61a5d4}</Project>
+      <Name>HomeCenter.HistoryDomain.Service</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,142 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<div ng-app="myTutorialApp">
+    <div class="row ng-cloak" ng-controller="deviceRelationsController as vm">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="well col-md-12">
+                    <div class="row">
+                        <div class="col-md-3">
+                            If state in group
+                        </div>
+                        <div class="col-md-3">
+                            <select ng-select class="selectpicker" ng-model="choosedActionGroup" ng-options="actionGroup.Name for actionGroup in groups"></select>
+                        </div>
+
+                        <div class="col-md-3">
+                            <select ng-select class="selectpicker" ng-model="choosedStateRelation" ng-options="stateRelation.StateRelationDescription for stateRelation in stateRelations"></select>
+                        </div>
+                        <div class="col-md-3">
+                            <input class="form-control" ng-model="ifStateValue" />
+                        </div>
+                    </div>
+                    &nbsp;
+                    <div class="row">
+                        <div class="col-md-3">
+                            then set state in group
+                        </div>
+                        <div class="col-md-3">
+                            <select ng-select class="selectpicker" ng-model="choosedReactionGroup" ng-options="reactionGroup.Name for reactionGroup in groups"></select>
+                        </div>
+                        <div class="col-md-3">
+                            to
+                        </div>
+                        <div class="col-md-3">
+                            <input class="form-control" ng-model="thenStateValue" />
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <button ng-disabled="!vm.canCreate()" class="btn btn-primary" ng-click="vm.createRelation()">Create</button>
+                </div>
+            </div>
+
+            <hr ng-if="deviceRelations.length!=0" />
+            <div ng-if="deviceRelations.length!=0" class="well row">
+                <div ng-repeat="relation in deviceRelations">
+                    <hr ng-if="$index!=0" />
+                    {{relation.Description}}
+                    <button class="btn btn-default pull-right" ng-click="vm.removeRelation(relation.Id)">
+                        <span class="glyphicon glyphicon-minus"></span>
+                    </button>
+
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-12">
+                    <hr />
+
+                    <div class="well row">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        What group?
+                                    </div>
+                                    <div class="col-md-4">
+                                        <select ng-select class="selectpicker" ng-model="choosedGroupForJob" ng-options="group.Name for group in groups"></select>
+                                    </div>
+                                </div>
+                                &nbsp;
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        What state?
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input class="form-control" ng-model="choosedStateForJob" />
+                                    </div>
+                                </div>
+                                &nbsp;
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        I'd like to use cron expression <input type="checkbox" ng-change="vm.onIsCronChange()" ng-model="isCron" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 vcenter" ng-show="!isCron">
+                                <p class="input-group">
+                                    <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="choosedDateForJob" is-open="calendarOpen" min-date="minDate" max-date="'2099-06-22'" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" ng-click="vm.calendarOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                    </span>
+                                </p>
+                            </div>
+
+                            <div class="col-md-3 vcenter" ng-if="!isCron">
+                                <timepicker id="timepicker" ng-if="!isCron" ng-disabled="isCron" ng-model="choosedTimeForJob" hour-step="1" minute-step="15" show-meridian="false"></timepicker>
+                            </div>
+                            <div class="col-md-4 vcenter" ng-if="isCron">
+                                <form role="form" class="form-inline">
+                                    <div class="form-group">
+                                        <div class="row">&nbsp;</div>
+                                        <input id="cron" ng-cron class="form-control" />
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                    <button class="btn btn-primary" ng-click="vm.addJob()" ng-disabled="!vm.canAddJob()">Add job</button>
+                </div>
+            </div>
+
+            <hr ng-if="jobs.length!=0" />
+
+            <div ng-if="jobs.length!=0" class="well row">
+                <div ng-repeat="job in jobs">
+                    <hr ng-if="$index!=0" />
+                    {{job.Description}}
+                    <button class="btn btn-default pull-right" ng-click="vm.removeJob(job.Id)">
+                        <span class="glyphicon glyphicon-minus"></span>
+                    </button>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

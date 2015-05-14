@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D03D1BC4-C2AA-4204-9BCF-30840A774A62}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>HomeCenter.AuthenticationDomain.Service</RootNamespace>
+    <AssemblyName>HomeCenter.AuthenticationDomain.Service</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ServiceLayer\AuthenticationService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="DTOs\UserDtoInput.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HomeCenter.AuthenticationDomain.Infrastructure\HomeCenter.AuthenticationDomain.Infrastructure.csproj">
+      <Project>{C8D87AE5-AA01-40FF-9650-6FC439021398}</Project>
+      <Name>HomeCenter.AuthenticationDomain.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HomeCenter.AuthenticationDomain.Model\HomeCenter.AuthenticationDomain.Model.csproj">
+      <Project>{C99DCE89-EFB0-4810-ABCC-40A1D8EE8AFC}</Project>
+      <Name>HomeCenter.AuthenticationDomain.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HomeCenter.CommonDomain.Infrastructure\HomeCenter.CommonDomain.Infrastructure.csproj">
+      <Project>{E9506ED1-CA03-4044-BEB8-842834BD797C}</Project>
+      <Name>HomeCenter.CommonDomain.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HomeCenter.CommonDomain.Model\HomeCenter.CommonDomain.Model.csproj">
+      <Project>{7BBFA0CA-3ADC-4EF1-951E-1301081B2BE5}</Project>
+      <Name>HomeCenter.CommonDomain.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HomeCenter.EventDomain.Service\HomeCenter.HistoryDomain.Service.csproj">
+      <Project>{EB83931C-6C7D-47B5-BDD4-3010FC61A5D4}</Project>
+      <Name>HomeCenter.HistoryDomain.Service</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,95 @@
+﻿@model HomeCenter.AuthenticationDomain.UserDtoInput
+
+
+
+@if (ViewBag.Header != null && ViewBag.Header != "")
+{
+    <div class="alert alert-warning">@ViewBag.Header</div>
+}
+<div ng-app="myTutorialApp">
+    <div class="row" ng-cloak ng-controller="createAccountController as vm">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            <div class="panel panel-primary">
+                <div class="panel-heading">Create new account.</div>
+                <div class="panel-body">
+                    <fieldset>
+
+                        <div class="row">
+                            <div class="col-md-1 editor-field">
+                                <p>Username:</p>
+                            </div>
+                            <div ng-class="{'has-error': !usernameValidation}" class="col-md-3 editor-field">
+                                <input type="text" class="form-control input-sm" id="inputError2" ng-change="vm.usernameChange()" ng-model="username" name="Username" required />
+                            </div>
+                            <div ng-if="!usernameValidation" class="col-md-3 editor-field">
+                                <span class="label label-danger">{{usernameInfo}}</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-1 editor-field">
+                                <p>Password:</p>
+                            </div>
+                            <div class="col-md-3 editor-field">
+                                <input type="text" class="form-control input-sm" id="inputError2" ng-change="vm.passwordChange()" ng-model="password" name="Password" required />
+                            </div>
+                        </div>
+                        <div class="row">&nbsp;</div>
+                        <div class="row">
+                            <div class="col-md-1">
+                                <input ng-disabled="vm.userValidation()" type="submit" class="btn btn-primary" value="Create" />
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        }
+        <div class="row">&nbsp;</div>
+        <div class="panel panel-primary">
+            <div class="panel-heading">Edit user roles.</div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <select ng-select ng-change="vm.chooseUser() " class="selectpicker" ng-model="choosedUsername" ng-options="user for user in usernames"></select>
+                    </div>
+                    <div class="col-md-3">
+                        <ul>
+                            <li ng-repeat="role in userRoles">
+                                <input ng-disabled="vm.isCheckboxDisabled()" type="checkbox" ng-click="vm.checkboxChange(role, $event)" ng-checked="vm.isChecked(role)" value="{{role}}" /> {{role}}
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3">
+                        <ul>
+                            <li ng-repeat="building in buildings">
+                                {{building.Name}}
+                                <ul>
+                                    <li ng-repeat="floor in building.Floors">
+                                        {{floor.Name}}
+                                        <ul>
+                                            <li ng-repeat="room in floor.Rooms">
+                                                <input ng-disabled="vm.isCheckboxDisabledRoom()" type="checkbox" ng-click="vm.checkboxChangeRoom(room, $event)" ng-checked="vm.isCheckedRoom(room)" value="{{room.Name}}" />  {{room.Name}}
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-1">
+                        <input ng-disabled="vm.saveRoleValidation()" type="button" ng-click="vm.changeRoles()"  class="btn btn-primary" value="Save" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

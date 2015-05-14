@@ -1,0 +1,72 @@
+﻿@{
+    ViewBag.Title = "Control of devices";
+}
+
+<div ng-app="myTutorialApp">
+    <div ng-cloak ng-controller="deviceControlController as vm">
+        <div cg-busy="promise">
+            <div class="row">
+
+                <div class="col-md-12">
+                    <div class="panel panel-primary" ng-repeat="building in buildingList">
+                        <div class="panel-heading">
+                            {{building.Name}}
+                        </div>
+                        <div class="panel-body">
+                            <div class="panel panel-primary" ng-repeat="floor in building.Floors">
+                                <div class="panel-heading">
+                                    {{floor.Name}}
+                                </div>
+                                <div class="panel-body">
+                                    <div class="panel panel-primary" ng-if="vm.roomContainsDevice(room.Id)" ng-repeat="room in floor.Rooms">
+                                        <div class="panel-heading">
+                                            {{room.Name}}
+                                        </div>
+                                        <div class="panel-body">
+                                            <div class="row" ng-repeat="device in vm.getDevicesInRoom(room)">
+                                                <div class="col-md-12">
+                                                    <hr ng-if="$index!=0" />
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="row">
+                                                        <div class="col-md-2">
+                                                            <div class="well" ng-if="device.Binary"> State: {{device.DeviceState>0 ? 'On' : 'Off'}}</div>
+                                                            <div class="well" ng-if="!device.Binary"> State: {{device.DeviceState}}</div>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <div class="well">Name: {{device.DeviceName}}</div>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <div class="well">Group: {{device.GroupName}}</div>
+                                                        </div>
+                                                        <div class="col-md-6"><div class="well"> {{device.Description}}</div></div>
+                                                    </div>
+                                                    <div class="row" ng-if="device.Binary && device.Changeable">
+                                                        <div class="col-md-2">
+                                                            <div class="well text-center">
+                                                                <button ng-click="vm.switchDeviceState(device)" class="btn btn-primary no-margin">On/Off</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12" ng-if="!device.Binary && device.Changeable">
+                                                    <div class="well text-center">
+                                                        <div ng-slider id="#Slider_{{device.Id}} slider" slider-min="{{device.MinValue}}" slider-max="{{device.MaxValue}}" ng-model="device.DeviceState" slider-stop="vm.stop(device)" start="vm.start()" slider-orientation="horizontal"></div>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+

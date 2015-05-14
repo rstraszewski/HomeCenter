@@ -1,0 +1,67 @@
+﻿[ng\:cloak], [ng-cloak], .ng-cloak {
+    display: none !important;
+}
+
+body {
+    position: relative;
+}
+
+.selectpicker {
+    color: rgb(0, 0, 0) !important;
+}
+
+.icon-flipped {
+transform: scaleX(-1);
+-moz-transform: scaleX(-1);
+-webkit-transform: scaleX(-1);
+-ms-transform: scaleX(-1);
+}
+
+ul {
+    list-style-type: none;
+    margin-left: 0;
+    padding-left: 0;
+}
+
+ul ul {
+    margin-left: 2em;
+}
+
+.logo {
+    background-image: url('/Content/logo.png');
+    background-repeat: no-repeat;
+    background-size:   cover !important;
+    height: 350px;
+    margin-top: -15px;
+    padding-top: 0;
+}
+
+.row-centered {
+    text-align:center;
+}
+
+
+.col-centered {
+    display:inline-block;
+    float:none;
+    /* reset the text-align */
+    text-align:left;
+    /* inline-block space fix */
+    margin-right:-4px;
+}
+
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}
+
+@media screen and (max-width: 1024px) { /* Specific to this particular image */
+.logo {
+    left: 50%;
+    margin-left: -512px;   /* 50% */
+  }
+.logged {
+    margin: 5px;
+}
+}

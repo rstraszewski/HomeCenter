@@ -1,0 +1,179 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+
+<div ng-app="myTutorialApp">
+    <div ng-cloak ng-controller="addDeviceController as vm">
+        <div cg-busy="promise">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Give device basic information:</div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            Device name: <input class="form-control" ng-model="deviceName" />
+                        </div>
+                    </div>
+                    <hr />
+                    <div ng-show="!choosedDeviceType.IsVirtual" class="row">
+                        <div class="col-md-6">
+                            Device address: <select ng-select class="selectpicker" ng-model="deviceAddress" ng-options="address for address in addresses"></select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-primary">
+                <div class="panel-heading">Choose device type:</div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            Device type:<select ng-select ng-change="vm.change()" class="selectpicker" ng-model="choosedDeviceType" ng-options="deviceType.Type for deviceType in deviceTypes"></select>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-12">
+                            Description: {{choosedDeviceType.Description}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="panel panel-primary">
+                <div class="panel-heading">Create or choose existing group!</div>
+                <div class="panel-body">
+                    Create new group?
+                    <input type="checkbox" ng-model="createGroup" />
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="well">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        Name:
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input class="form-control" ng-disabled="!createGroup" ng-model="groupName" />
+                                    </div>
+                                </div>
+                                <hr />
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        Description:
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input class="form-control" ng-disabled="!createGroup" ng-model="groupDescription" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="well">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        Choose group:
+                                        <select ng-select ng-disabled="createGroup" ng-change="vm.change() " class="selectpicker" ng-model="choosedGroup" ng-options="group.Name for group in groups"></select>
+                                    </div>
+                                </div>
+                                <hr />
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div ng-class="{'panel-default': createGroup, 'panel-primary': !createGroup}" class="panel">
+                                            <div class="panel-heading">Description:</div>
+                                            <div class="panel-body">{{choosedGroup.Description}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-primary">
+                <div class="panel-heading">Where you want to place a device?</div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            Choose Building:
+                            <select ng-select ng-change="vm.selectedBuilding() " class="selectpicker" ng-model="choosedBuilding" ng-options="building.Name for building in buildings"></select>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-6">
+                            Choose Floor:
+                            <select ng-select ng-change="vm.selectedFloor() " class="selectpicker" ng-model="choosedFloor" ng-options="floor.Name for floor in floors"></select>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-6">
+                            Choose Room:
+                            <select ng-select ng-change="vm.selectedRoom() " class="selectpicker" ng-model="choosedRoom" ng-options="room.Name for room in rooms"></select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <input type="button" class="btn btn-primary" value="Create!" ng-disabled="!vm.canAdd()" ng-click="vm.addDevice()" />
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <hr ng-if="deviceList.length!=0" />
+                <div ng-if="deviceList.length!=0" class="row">
+                    <div ng-repeat="device in deviceList">
+                        <hr ng-if="$index!=0" />
+                        <div class="col-md-12">
+                            <div class="well row">
+                                <div class="col-md-3">
+                                    Name: {{device.DeviceName}}
+                                </div>
+
+                                <div class="col-md-3">
+                                    Description: {{device.Description}}
+                                </div>
+
+                                <div class="col-md-3">
+                                    Group: {{device.GroupName}}
+                                </div>
+                                <button class="btn btn-default pull-right" ng-click="vm.removeDevice(device.Id)">
+                                    <span class="glyphicon glyphicon-minus"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <hr />
+            <div class="col-md-12">
+                <hr ng-if="deviceList.length!=0" />
+                <div ng-if="deviceList.length!=0" class="row">
+                    <div ng-repeat="device in deviceList">
+                        <hr ng-if="$index!=0" />
+                        <div class="col-md-12">
+                            <div class="well row">
+                                <div class="col-md-3">
+                                    Name: {{device.DeviceName}}
+                                </div>
+                                <div class="col-md-6">
+                                    Group:
+                                    <select ng-select class="selectpicker" ng-model="device.NewGroup" ng-options="group.Name for group in groups"></select>
+                                </div>
+                                <button class="btn btn-default pull-right" ng-click="vm.changeGroup(device.Id, device.NewGroup.Id)">
+                                    <span class="glyphicon glyphicon-ok"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>

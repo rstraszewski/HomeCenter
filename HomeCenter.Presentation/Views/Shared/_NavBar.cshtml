@@ -1,0 +1,79 @@
+@using HomeCenter.AuthenticationDomain.Model.DomainLayer.Enums
+@using HomeCenter.Models.Helpers
+@using Microsoft.Ajax.Utilities
+@helper ActiveItem(string actionName, string controllerName, string areaName)
+{
+    if(ViewContext.RouteData.Values["action"].ToString() == actionName &&
+            ViewContext.RouteData.Values["controller"].ToString() == controllerName &&
+            (ViewContext.RouteData.DataTokens["area"] == null || ViewContext.RouteData.DataTokens["area"].ToString() == areaName))
+    {
+    @:active
+    }
+}
+
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            @if(User.Identity.IsAuthenticated)
+            {
+                <p class="navbar-text logged">Logged: @User.Identity.Name</p>
+            }
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-left">
+                <li class="@ActiveItem("Index", "Home", null)">@Html.ActionLink("Home", "Index", "Home")</li>
+
+                @if(User.IsInRole(AuthenticationRoles.User.GetDescription())
+                    || User.IsInRole(AuthenticationRoles.Administrator.GetDescription()))
+                {
+                    <li class="@ActiveItem("Index", "DeviceControl", null)">@Html.ActionLink("Control", "Index", "DeviceControl")</li>
+                    <li class="@ActiveItem("Index", "Media", null)">@Html.ActionLink("Media", "Index", "Media")</li>
+                }
+                @if(User.IsInRole(AuthenticationRoles.Scheduler.GetDescription())
+                     || User.IsInRole(AuthenticationRoles.Administrator.GetDescription()))
+                {
+                    <li class="@ActiveItem("Index", "DeviceRelations", null)">@Html.ActionLink("Behaviours", "Index", "DeviceRelations")</li>
+                }
+                @if(User.IsInRole(AuthenticationRoles.AccountManager.GetDescription())
+                    || User.IsInRole(AuthenticationRoles.Administrator.GetDescription()))
+                {
+                    <li class="@ActiveItem("Create", "Account", null)">@Html.ActionLink("Accounts", "Create", "Account")</li>
+                }
+                @if(User.IsInRole(AuthenticationRoles.Builder.GetDescription())
+                    || User.IsInRole(AuthenticationRoles.Administrator.GetDescription()))
+                {
+                    <li class="@ActiveItem("Index", "CreateBuilding", null)">@Html.ActionLink("Buildings", "Index", "CreateBuilding")</li>
+                    <li class="@ActiveItem("Index", "AddDevice", null)">@Html.ActionLink("Devices", "Index", "AddDevice")</li>
+                    
+                }
+
+            </ul>
+
+            @if(!User.Identity.IsAuthenticated)
+            {
+                <ul class="nav navbar-nav navbar-right">
+
+                    <li class="@ActiveItem("Login", "Account", null)">@Html.ActionLink("Log in", "Login", "Account")</li>
+
+                </ul>
+            }
+            else
+            {
+                <ul class="nav navbar-nav navbar-right">
+
+                    <li class="@ActiveItem("Logout", "Account", null)">@Html.ActionLink("Log out", "Logout", "Account")</li>
+
+                </ul>
+            }
+
+        </div>
+    </div>
+</div>
+
+
+<div id="fix-for-navbar-fixed-top-spacing" style="height: 40px; margin-bottom: 40px;">&nbsp;</div>

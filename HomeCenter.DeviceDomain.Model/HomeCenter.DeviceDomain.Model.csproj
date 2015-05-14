@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{90F9556E-3ED7-4064-8003-D5C01D645097}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>HomeCenter.DeviceDomain</RootNamespace>
+    <AssemblyName>HomeCenter.DeviceDomain.Model</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.3.2.1\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper.Net4">
+      <HintPath>..\packages\AutoMapper.3.2.1\lib\net40\AutoMapper.Net4.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="TypeLite">
+      <HintPath>..\packages\TypeLite.0.9.5.0\lib\net4\TypeLite.dll</HintPath>
+    </Reference>
+    <Reference Include="TypeLite.Net4">
+      <HintPath>..\packages\TypeLite.0.9.5.0\lib\net4\TypeLite.Net4.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DomainLayer\Entites\Address.cs" />
+    <Compile Include="DomainLayer\Entites\DeviceJob.cs" />
+    <Compile Include="DomainLayer\Entites\Building.cs" />
+    <Compile Include="DomainLayer\Entites\Device.cs" />
+    <Compile Include="DomainLayer\Entites\DeviceRelation.cs" />
+    <Compile Include="DomainLayer\Entites\DomainEvents\DeviceStateHasChanged.cs" />
+    <Compile Include="DomainLayer\Entites\DomainEvents\DeviceStateHasChangedFromSerialPort.cs" />
+    <Compile Include="DomainLayer\Entites\DomainEvents\DeviceStateHasChangedFromUi.cs" />
+    <Compile Include="DomainLayer\Entites\DeviceType.cs" />
+    <Compile Include="DomainLayer\Entites\DomainEvents\StartDeviceJob.cs" />
+    <Compile Include="DomainLayer\Entites\Floor.cs" />
+    <Compile Include="DomainLayer\Entites\Group.cs" />
+    <Compile Include="DomainLayer\Entites\Range.cs" />
+    <Compile Include="DomainLayer\Entites\Room.cs" />
+    <Compile Include="DomainLayer\Enum\StateRelation.cs" />
+    <Compile Include="DomainLayer\RepositoryInterface\IAddressRepository.cs" />
+    <Compile Include="DomainLayer\RepositoryInterface\IBuildingRepository.cs" />
+    <Compile Include="DomainLayer\RepositoryInterface\IDeviceJobRepository.cs" />
+    <Compile Include="DomainLayer\RepositoryInterface\IDeviceRelationRepository.cs" />
+    <Compile Include="DomainLayer\RepositoryInterface\IDeviceTypeRepository.cs" />
+    <Compile Include="DomainLayer\RepositoryInterface\IGroupRepository.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="DomainLayer\RepositoryInterface\IDeviceRepository.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HomeCenter.CommonDomain.Infrastructure\HomeCenter.CommonDomain.Infrastructure.csproj">
+      <Project>{e9506ed1-ca03-4044-beb8-842834bd797c}</Project>
+      <Name>HomeCenter.CommonDomain.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HomeCenter.CommonDomain.Model\HomeCenter.CommonDomain.Model.csproj">
+      <Project>{7bbfa0ca-3adc-4ef1-951e-1301081b2be5}</Project>
+      <Name>HomeCenter.CommonDomain.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HomeCenter.CommonDomain.Service\HomeCenter.CommonDomain.Service.csproj">
+      <Project>{5E43E594-B8F8-4E93-BB7B-2B45C1CDDEA8}</Project>
+      <Name>HomeCenter.CommonDomain.Service</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

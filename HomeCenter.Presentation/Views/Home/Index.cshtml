@@ -1,0 +1,76 @@
+@{
+    ViewBag.Title = "Index";
+}
+
+@section featured {
+    <div class="logo">
+
+    </div>
+    <div class="jumbotron">
+        <div class="cal container">
+            <p class="text-left">Any sufficiently... </p>
+            <p class="text-center">...advanced technology...</p>
+            <p class="text-right">...is indistinguishable from magic.</p>
+        </div>
+    </div>
+}
+<!-- Example row of columns -->
+<div ng-app="myTutorialApp">
+    <div class="row" ng-controller="mainController as vm">
+
+
+        <div class="well col-md-12">
+
+
+            <div class="row">
+                <div class="col-md-6">
+                    Filter by username:  <select ng-select class="selectpicker" ng-model="choosedUsername" ng-options="user for user in usernames"></select>
+                </div>
+            </div>
+
+            <hr />
+
+
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="input-group">
+                        <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="fromDateTime" is-open="fromOpened" min-date="minDate" max-date="'2099-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="vm.fromOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                    </p>
+                </div>
+                <div class="col-md-6">
+                    <p class="input-group">
+                        <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="toDateTime" is-open="toOpened" min-date="minDate" max-date="'2099-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="vm.toOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-2">
+                    <button class="btn btn-primary" ng-click="vm.filter()" value="">Filter</button>
+                </div>
+            </div>
+        </div>
+        <div class="well col-md-12">
+
+            <div cg-busy="promise">
+                <p><strong>Page:</strong> {{tableParams.page()}}</p>
+                <p><strong>Count per page:</strong> {{tableParams.count()}}</p>
+
+                <table ng-table="tableParams" class="table">
+                    <tr ng-repeat="log in $data">
+                        <td data-title="'DateTime'">{{log.DateTime}}</td>
+                        <td data-title="'Description'">{{log.Description}}</td>
+                        <td data-title="'Username'">{{log.Username}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
