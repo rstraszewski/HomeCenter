@@ -1,5 +1,11 @@
 # HomeCenter
-Engineering Project
+
+Wrocaw University of Technology.<br>
+Rafal Straszewski.
+
+System zarządzania inteligentnym budynkiem z wykorzystaniem komputera Raspberry Pi.<br>
+
+Intelligent building management system based on Raspberry Pi computer.
 
 Raspberry Pi server communicates with devices (custom) using nrf24l01+ wireless trancivers (connected via serialport).
 
